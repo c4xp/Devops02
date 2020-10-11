@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-files
+  namespace: example
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+     requests:
+       storage: 15Gi
+  # set only if you dont have a default storage-class
+  # storageClassName: nfs-client

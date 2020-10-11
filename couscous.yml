@@ -1,0 +1,53 @@
+# Base URL of the published website for css
+baseUrl: /docs/
+
+# Set the target branch in which to deploy the generated website
+branch: docs
+
+# List of directories to exclude from the processing (default contains "vendor" and "website")
+# Paths are relative to the optional include paths given when generating the website, repository root by default
+exclude:
+    - ansible
+    - assets
+    - db
+    - kube
+    - vendor
+    - demox
+    - '%gitignore%'
+
+# The left menu bar
+menu:
+    items:
+        home:
+            text: Introduction
+            relativeUrl: index.html
+        why:
+            text: Why
+            relativeUrl: 01.why.html
+        how:
+            text: How
+            relativeUrl: 02.how.html
+        what:
+            text: What
+            relativeUrl: 03.what.html
+        master:
+            text: Master
+            relativeUrl: 04.master.html
+        infraascode:
+            text: Infrastructure
+            relativeUrl: 05.infraascode.html
+        demo:
+            text: Demo
+            relativeUrl: 07.demo.html
+        qa:
+            text: QA
+            relativeUrl: 08.qa.html
+        quiz:
+            text: Quiz
+            relativeUrl: 09.quiz.html
+        feedback:
+            text: Feedback
+            relativeUrl: 10.feedback.html
+        gitutil:
+            text: "Comenzi Git"
+            relativeUrl: gitutil.html

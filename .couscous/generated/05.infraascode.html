@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Devops02</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Devops02
+                <small class="hidden-xs hidden-sm">
+                    Infrastructure
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/index.html">
+                                        Introduction
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/01.why.html">
+                                        Why
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/02.how.html">
+                                        How
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/03.what.html">
+                                        What
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/04.master.html">
+                                        Master
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/05.infraascode.html">
+                                        Infrastructure
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/07.demo.html">
+                                        Demo
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/08.qa.html">
+                                        QA
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/09.quiz.html">
+                                        Quiz
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/10.feedback.html">
+                                        Feedback
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/gitutil.html">
+                                        Comenzi Git
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="jenkins">Jenkins</h1>
+<h2 id="continous-integration">Continous Integration</h2>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/cicd.jpg" alt="CI/CD" /></p>
+<p>We will not cover this here but that can be done before each build.</p>
+<ul>
+<li>Coding Standards Recommendations</li>
+<li>Generation of Documentation</li>
+<li>Sonar</li>
+<li>Unit Testing</li>
+<li>Building artefacts</li>
+<li>Static Application Security Testing (SAST)
+etc..</li>
+</ul>
+<h2 id="continous-deployment">Continous Deployment</h2>
+<p>First we need to setup the Git repo</p>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/jenkins01.jpg" alt="Jenkins01" /></p>
+<p>Docker Build and Publish</p>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/jenkins02.jpg" alt="Jenkins02" /></p>
+<p>Docker Build and Publish -&gt; Advanced</p>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/jenkins03.jpg" alt="Jenkins03" /></p>
+<p>Deploy to Kubernetes</p>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/jenkins04.jpg" alt="Jenkins04" /></p>
+<p>Deploy to Kubernetes plugin is broken but we can do it manually</p>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/jenkins05.jpg" alt="Jenkins05" /></p>
+<h2 id="infrastructure-as-code">Infrastructure as Code</h2>
+<p>See assets/devops folder</p>
+<p>Dockerization is not explained in this class.</p>
+<p>See assets/kubectl folder</p>
+<pre><code>kubectl get nodes
+kubectl config current-context
+kubectl config set-context local --namespace=example</code></pre>
+<h2 id="kubectl-configmaps">Kubectl configmaps</h2>
+<pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  # kubectl config current-context
+  name: example-configmap
+  # kubectl config set-context local --namespace=example
+  namespace: example
+data:
+  LOCALHOST: www.example.com
+  APP_NAME: Example
+  APP_VERSION: "1.0.0"</code></pre>
+<h2 id="kubectl-secrets">Kubectl secrets</h2>
+<pre><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: example
+type: Opaque
+data:
+  # base64 encoded values
+  DB_PASSWORD: ZXhhbXBsZTAw</code></pre>
+<h2 id="questions">Questions</h2>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/questions.jpg" alt="Questions" /></p>
+<p><a href="07.demo.html">Demo→</a></p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

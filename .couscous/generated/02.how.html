@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Devops02</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                Devops02
+                <small class="hidden-xs hidden-sm">
+                    How
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="/index.html">
+                                        Introduction
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/01.why.html">
+                                        Why
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/02.how.html">
+                                        How
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/03.what.html">
+                                        What
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/04.master.html">
+                                        Master
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/05.infraascode.html">
+                                        Infrastructure
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/07.demo.html">
+                                        Demo
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/08.qa.html">
+                                        QA
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/09.quiz.html">
+                                        Quiz
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/10.feedback.html">
+                                        Feedback
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="/gitutil.html">
+                                        Comenzi Git
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="how-do-we-do-it-">How do we do it ?</h1>
+<p>Build a kubernetes cluster of course :)</p>
+<ul>
+<li>Build a Team which always uses a git repository</li>
+<li>Dockerize the application/s</li>
+<li>Use a Continous integration / delivery / deployment</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/cicd.jpg" alt="CI/CD" /></p>
+<h1 id="layer-1---physical">Layer 1 - Physical</h1>
+<ul>
+<li>Firewall</li>
+<li>Load balancer machine: nginx / haproxy</li>
+<li>Kubernetes worker nodes must be an odd number 3, 5, 7.. so that a leader could be elected</li>
+<li>Orchestrator software</li>
+<li>File system / Databases / Mail servers</li>
+</ul>
+<h1 id="some-chosen-hardware">Some chosen Hardware</h1>
+<ul>
+<li>
+<p>CPUs: SSe4.2 minimum, nginx needs it now, speed is king for optimizations
+<a href="https://ark.intel.com/content/www/us/en/ark/products/65730/intel-xeon-processor-e3-1240-v2-8m-cache-3-40-ghz.html">Intel Xeon E3 1240 v2 - 45~70$</a></p>
+</li>
+<li>
+<p>Motherboard: Ipmi, Ecc, Low power gpu, Rack friendly, Cheap
+<a href="https://ark.intel.com/content/www/us/en/ark/products/53557/intel-server-board-s1200btl.html">Intel S1200BTL - 30~60$</a></p>
+</li>
+<li>
+<p>Memory: Udimm 1Rx8, Ecc and low latency, Databases: also the more the better
+<a href="https://ark.intel.com/content/www/us/en/ark/products/53557/intel-server-board-s1200btl.html">Kingston KVR1333D3E9S/8G - 40~60$</a></p>
+</li>
+<li>
+<p>PSU: active pfc, Ups: pure sine wave
+<a href="https://www.pcgarage.ro/surse/SilentiumPC/elementum-e2-80-plus-450w/">SilentiumPC Elementum E2, 80+, 450W</a>
+<a href="http://powerquality.eaton.com/Products-services/Backup-Power-UPS/5115-eol.aspx">Eaton 5115</a></p>
+</li>
+<li>SSD: MLCC for long life</li>
+</ul>
+<pre><code>sudo apt install sysbench
+sysbench fileio --time=60 --file-num=1 --file-extra-flags= --file-total-size=4096 --file-block-size=4096 --file-fsync-all=on --file-test-mode=rndwr --file-fsync-freq=0 --file-fsync-end=0  --threads=1 --percentile=99 prepare
+sysbench fileio --time=60 --file-num=1 --file-extra-flags= --file-total-size=4096 --file-block-size=4096 --file-fsync-all=on --file-test-mode=rndwr --file-fsync-freq=0 --file-fsync-end=0  --threads=1 --percentile=99 run</code></pre>
+<ul>
+<li>120GB ADATA SU700, total number of events: 21467, 99th percentile: 10.84 (node-u1)</li>
+</ul>
+<pre><code>sudo lshw -short -C disk</code></pre>
+<ul>
+<li>256GB Samsung SSD 860, total number of events: 39639, 99th percentile: 2.52</li>
+<li>128GB ADATA SP920SS, total number of events: 50910, 99th percentile: 2.61 (node-lb)</li>
+<li>256GB ADATA SU900, total number of events: 64638, 99th percentile: 2.14 (node-u3)</li>
+<li>256GB Crucial MX500, total number of events: 109524, 99th percentile: 1.64</li>
+</ul>
+<p>And the winner :))</p>
+<pre><code>Throughput:
+    read, MiB/s:                  0.00
+    written, MiB/s:               47.76
+General statistics:
+    total time:                   60.0001s
+    total number of events:       733566
+Latency (ms):
+         min:                     0.05
+         avg:                     0.08
+         max:                     15.65
+         99th percentile:         0.26
+         sum:                     59507.34</code></pre>
+<ul>
+<li>120GB KINGSTON SV300S3, total number of events: 733566, 99th percentile: 0.26 (node-u2)</li>
+</ul>
+<p>Just kidding, but that shows what kind of optimizations we need to look into.</p>
+<pre><code>sysbench --test=fileio cleanup
+fstrim -av</code></pre>
+<h2 id="questions">Questions</h2>
+<p><img src="https://raw.githubusercontent.com/c4xp/Devops02/master/assets/questions.jpg" alt="Questions" /></p>
+<p><a href="03.what.html">What→</a></p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

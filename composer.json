@@ -1,0 +1,13 @@
+{
+    "_readme": [
+        "composer install --no-dev"
+    ],
+    "license": "MIT",
+    "require": {
+        "vlucas/phpdotenv": "^3.3",
+        "php": ">=7.3",
+        "erusev/parsedown-extra": "^0.8",
+        "couscous/couscous": "^1.8"
+    }
+
+}
