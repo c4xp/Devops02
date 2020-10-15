@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demox-service
+  namespace: demox
+  labels:
+    app: demox
+spec:
+  ports:
+  - name: port8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: demox
+    tier: app
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: demox-ingress
+  namespace: demox
+  #annotations:
+    #kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: www.c4xp.ro
+    http:
+      paths:
+      - backend:
+          serviceName: demox-service
+          servicePort: 8080
+        path: /
+  - host: c4xp.ro
+    http:
+      paths:
+      - backend:
+          serviceName: demox-service
+          servicePort: 8080
+        path: /
+  tls:
+  - hosts:
+    - www.c4xp.ro
+    - c4xp.ro
+    secretName: demox-cert-tls

@@ -4,7 +4,8 @@ ENV PHP_INI_FILE="/etc/php7/php.ini" \
     PHP_FPM_CONF="/etc/php7/php-fpm.d/www.conf" \
     TZ="Etc/UTC" \
     COMPOSER_ALLOW_SUPERUSER="1" \
-    COMPOSER_HOME="/root/.composer"
+    COMPOSER_HOME="/root/.composer" \
+    APP_NAME="example"
 
 # Install packages and remove cache
 RUN set -ex; \
@@ -75,7 +76,7 @@ WORKDIR /var/www/html
 
 # If you make the assumption that you change your codebase more often than your Composer dependencies — then your Dockerfile should run composer install before copying across your codebase. This will mean that your composer install layer will be cached even if your codebase changes. The layer will only be invalidated when you actually change your dependencies.
 COPY --chown=nobody . /var/www/html
-COPY --chown=nobody cfg.php /var/www/html/demox
+COPY --chown=nobody demox/cfg.php /var/www/html/demox
 #RUN composer dump-autoload --no-scripts --no-dev --optimize
 
 USER root

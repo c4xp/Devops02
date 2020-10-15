@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  php:
+    container_name: php.demox
+    image: cloud.canister.io:5000/c4xp/demox:latest
+    build:
+      context: ./
+      dockerfile: ./.php.dockerfile
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - ./demox:/var/www/html/demox
+    environment:
+      DATABASE_URL: db
+      MYSQL_USER: demox_user
+      MYSQL_PASSWORD: demox-p4sswd
+      MYSQL_DATABASE: demox_db
+    links:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: dtb.demox
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./assets/devops/dbcreation.sql:/docker-entrypoint-initdb.d/dbcreation.sql
+    environment:
+      MYSQL_DATABASE: demox_db
+      MYSQL_USER: demox_user
+      MYSQL_PASSWORD: demox-p4sswd
+      MYSQL_ROOT_PASSWORD: testing
+
+volumes:
+  mysql_data:

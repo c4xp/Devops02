@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demox-memcached
+  namespace: demox
+  labels:
+    app: demox
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: demox
+      tier: cache
+  template:
+    metadata:
+      name: memcached
+      labels:
+        app: demox
+        tier: cache
+    spec:
+      containers:
+      - name: memcached
+        image: 'bitnami/memcached:latest'
+        ports:
+          - containerPort: 11211
+

@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demox-deployment
+  namespace: demox
+  labels:
+    app: demox
+spec:
+  replicas: 2
+  # number of seconds after pod is up that it's considered ready
+  minReadySeconds: 6
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # the maximum number of pods that can be created over the desired number of pods
+      maxSurge: 1
+      # the maximum number of pods that can be unavailable during the update process
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: demox
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: demox
+        tier: app
+    spec:
+      volumes:
+      - name: demox-files
+        persistentVolumeClaim:
+          claimName: demox-files-pvc
+      containers:
+      - name: demox
+        # docker login --username=username cloud.canister.io:5000
+        # docker images
+        # docker tag 0a1b2c3d4e5f cloud.canister.io:5000/c4xp/demox:latest
+        # docker push cloud.canister.io:5000/c4xp/demox
+        image: cloud.canister.io:5000/c4xp/demox:latest
+        env:
+        # plaintexts
+        - name: APP_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: "demox-configmap"
+              key: "APP_NAME"
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: "demox-configmap"
+              key: "DATABASE_URL"
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: "demox-configmap"
+              key: "MYSQL_DATABASE"
+        - name: LOCALHOST
+          valueFrom:
+            configMapKeyRef:
+              name: "demox-configmap"
+              key: "LOCALHOST"
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: "demox-configmap"
+              key: "MYSQL_USER"
+        # secrets
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "demox-secret"
+              key: "MYSQL_PASSWORD"
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+           - mountPath: "/var/www/html/demox/public/img"
+             name: demox-files
+      # need first to generate registry credentials in Rancher
+      imagePullSecrets:
+          - name: demox-canister

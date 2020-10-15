@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcached-demox
+  namespace: demox
+  labels:
+    app: demox
+spec:
+  type: NodePort
+  ports:
+    - port: 11211
+  selector:
+    app: demox
+    tier: cache
+

@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-demox
+  namespace: demox
+  labels:
+    app: demox
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      protocol: TCP
+      nodePort: 30336
+  selector:
+    app: demox
+    tier: database

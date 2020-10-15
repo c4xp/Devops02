@@ -1,0 +1,18 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: demox-cert
+  namespace: demox
+spec:
+  secretName: demox-cert-tls
+  commonName: "www.c4xp.ro"
+  dnsNames:
+  - "www.c4xp.ro"
+  - c4xp.ro
+  privateKey:
+    rotationPolicy: Always
+  issuerRef:
+    name: http-issuer
+    kind: ClusterIssuer
+#openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout localhost.key -out localhost.crt -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
