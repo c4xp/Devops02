@@ -9,9 +9,14 @@ subTitle: Introduction
 
 What it really means to create an on-premise cloud with Kubernetes. PeakIt.003
 
+## Me
+
+![Me](https://raw.githubusercontent.com/c4xp/Devops02/master/assets/progress.jpg)
+
 ## What subjects we address in this class:
 
 - Why ?! Does it worth it ?
+- Drawbacks
 - Setting up one minimal linux host for a node
 - Continous Integration and Continous Deployment
 - Kubectl for Dummies
@@ -30,6 +35,8 @@ What it really means to create an on-premise cloud with Kubernetes. PeakIt.003
 - Shared persistent data: Longhorn
 - Monitoring / Logging / Optimizations are not in our scope
 
+## Each of us
+
 ## Surprizes
 
 - We will ask each participant (not really a random order) a simple question
@@ -46,7 +53,13 @@ Coffee and Space, or how Einstein put it: Space-Time. Why ?! For servers of cour
 ### Question 1
 
 ```
-What Linux distribution is your favourite ? and why :)
+What will you do with a cluster ?
+```
+
+### Question 2
+
+```
+How much time should I invest in learning this sorcery ?
 ```
 
 ## Get Involved
