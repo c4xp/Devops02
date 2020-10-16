@@ -32,8 +32,8 @@ What it really means to create an on-premise cloud with Kubernetes. PeakIt.003
 
 ## Surprizes
 
-- We will ask each participant (zoom order) a simple question
-- 
+- We will ask each participant (not really a random order) a simple question
+- At the end a fully fledged project will be shown
 
 ## Prerequisites
 
