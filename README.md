@@ -13,6 +13,10 @@ What it really means to create an on-premise cloud with Kubernetes. PeakIt.003
 
 ![Me](https://raw.githubusercontent.com/c4xp/Devops02/master/assets/progress.jpg)
 
+## Workshop live
+
+Be patient. Interactive meetup. Recording. Demo gods.
+
 ## What subjects we address in this class:
 
 - Why ?! Does it worth it ?

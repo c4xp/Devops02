@@ -1,6 +1,7 @@
 {
     "_readme": [
-        "composer install --no-dev"
+        "composer install --no-dev",
+        "couscous preview"
     ],
     "license": "MIT",
     "require": {
