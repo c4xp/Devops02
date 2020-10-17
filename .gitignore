@@ -1,0 +1,13 @@
+.DS_Store
+.vscode
+/nbproject
+/nbproject/private/
+/nbproject/project.properties
+/nbproject/project.xml
+*.pem
+*.retry
+/.couscous/
+vendor/
+
+.idea/*
+/composer.lock
