@@ -1,5 +1,5 @@
 # Base URL of the published website for css
-baseUrl: /docs/
+baseUrl: /docs
 
 # Set the target branch in which to deploy the generated website
 branch: docs
@@ -14,6 +14,8 @@ exclude:
     - vendor
     - demox
     - '%gitignore%'
+
+cname: docs.c4xp.ro
 
 # The left menu bar
 menu:
@@ -48,6 +50,6 @@ menu:
         feedback:
             text: Feedback
             relativeUrl: 10.feedback.html
-        gitutil:
-            text: "Comenzi Git"
-            relativeUrl: gitutil.html
+        thankyou:
+            text: "Thank you"
+            relativeUrl: 11.thankyou.html

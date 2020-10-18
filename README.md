@@ -13,9 +13,11 @@ What it really means to create an on-premise cloud with Kubernetes. PeakIt.003
 
 ![Me](https://raw.githubusercontent.com/c4xp/Devops02/master/assets/progress.jpg)
 
-## Workshop live
+## Live Workshop
 
-Be patient. Interactive meetup. Recording. Demo gods.
+- Be patient if something goes south for the winter. (Interactive meetup)
+- Recording. Live on baywatch.
+- Demo gods prayer.
 
 ## What subjects we address in this class:
 
@@ -40,6 +42,8 @@ Be patient. Interactive meetup. Recording. Demo gods.
 - Monitoring / Logging / Optimizations are not in our scope
 
 ## Each of us
+
+- Name, skillset, expectations
 
 ## Surprizes
 
